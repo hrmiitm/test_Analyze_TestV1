@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Analyze_TestV1 Results</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    pre { background:#f6f8fa; padding:1rem; border-radius:6px; overflow:auto }
+  </style>
+</head>
+<body>
+  <h1>Analyze_TestV1</h1>
+  <p>This repository generates result.json (published to GitHub Pages by CI). If result.json is available, it will be displayed below.</p>
+  <p><a href="/result.json">Open result.json directly</a></p>
+  <h2>Latest Result</h2>
+  <div id="output"><em>Loading...</em></div>
+
+  <script>
+    async function load() {
+      try {
+        const res = await fetch('/result.json');
+        if (!res.ok) throw new Error('result.json not found');
+        const data = await res.json();
+        document.getElementById('output').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      } catch (err) {
+        document.getElementById('output').innerHTML = '<p><em>' + err.message + '</em></p>';
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
